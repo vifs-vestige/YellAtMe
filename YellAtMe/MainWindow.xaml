@@ -22,7 +22,8 @@
             </tb:TaskbarIcon.ContextMenu>
 
         </tb:TaskbarIcon>
-        
-        
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="166,143,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+
+
     </Grid>
 </Window>

@@ -22,10 +22,28 @@ namespace YellAtMe
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        
         public MainWindow()
         {
             InitializeComponent();
-            Hide();
+            new AlarmTimer(this);
+        }
+
+
+
+        private delegate void UpdateTextCallback(string message); 
+
+        public void SetTextBox(string s)
+        {
+            textBlock.Dispatcher.Invoke(
+                new UpdateTextCallback(SetText),
+                new object[] { s });
+        }
+
+        private void SetText(string s)
+        {
+            textBlock.Text = s;
         }
 
         #region contextMenu

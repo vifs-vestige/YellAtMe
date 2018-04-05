@@ -1,6 +1,7 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,27 @@ namespace YellAtMe
         public MainWindow()
         {
             InitializeComponent();
-            TaskbarIcon tbi = new TaskbarIcon();
-            tbi.ToolTipText = "hello world";
+            Hide();
+        }
+
+        #region contextMenu
+
+        private void OpenWindow(object sender, RoutedEventArgs e)
+        {
+            Show();
+        }
+
+        private void CloseProgram(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        #endregion
+
+        public void RedXHit(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
         }
     }
 }

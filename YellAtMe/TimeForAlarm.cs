@@ -8,10 +8,12 @@ namespace YellAtMe
 {
     public abstract class TimeForAlarm
     {
+        protected DateTime Alarm;
         private bool Triggered = false;
         public string AlarmType { get; set; }
         public string AlarmTime { get; set; }
         public int ID { get; set; }
+        
 
         public bool getTriggered()
         {
@@ -40,12 +42,18 @@ namespace YellAtMe
 
     public class DailyAlarm : TimeForAlarm
     {
-        private DateTime Alarm;
+        public DailyAlarm(int id, int hour, int minuite)
+        {
+            ID = id;
+            AlarmType = "Daily";
+            
+            SetTime(hour, minuite);
+        }
 
         public void SetTime(int hour, int minuite)
         {
             Alarm = new DateTime(1, 1, 1, hour, minuite, 0);
-            
+            AlarmTime = "Everyday at " + Alarm.ToShortTimeString();
         }
 
 
@@ -60,13 +68,20 @@ namespace YellAtMe
 
     public class WeeklyAlarm : TimeForAlarm
     {
-        private DateTime Alarm;
         private List<DayOfWeek> Days;
+
+        public WeeklyAlarm(int id, List<DayOfWeek> days, int hour, int minuites)
+        {
+            ID = id;
+            AlarmType = "Weekly";
+            SetTime(days, hour, minuites);
+        }
 
         public void SetTime(List<DayOfWeek> days, int hour, int minuite)
         {
             Days = days;
             Alarm = new DateTime(1, 1, 1, hour, minuite, 0);
+            AlarmTime = Alarm.ToShortTimeString() + " on " + String.Join(", " , days.OrderBy(x => x).Select(x => x.ToString()));
         }
 
         public override bool AlarmTriggered()
@@ -82,11 +97,18 @@ namespace YellAtMe
 
     public class RandomAlarm : TimeForAlarm
     {
-        private DateTime Alarm;
+
+        public RandomAlarm(int id, int year, int month, int day, int hour, int minuite)
+        {
+            AlarmType = "Random";
+            ID = id;
+            SetAlarm(year, month, day, hour, minuite);
+        }
 
         public void SetAlarm(int year, int month, int day, int hour, int minuite)
         {
             Alarm = new DateTime(year, month, day, hour, minuite, 0);
+            AlarmTime = "Alarm will go off at " + Alarm.ToShortDateString() + " "+ Alarm.ToShortTimeString();
         }
 
         public override bool AlarmTriggered()

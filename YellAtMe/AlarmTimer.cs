@@ -17,6 +17,19 @@ namespace YellAtMe
         {
             TimeForAlarms = new List<TimeForAlarm>();
             window.AlarmGrid.ItemsSource = TimeForAlarms;
+
+            //for testing display
+            //var temp = new DailyAlarm(0, 5,34);
+            //TimeForAlarms.Add(temp);
+            //var days = new List<DayOfWeek>();
+            //days.Add(DayOfWeek.Monday);
+            //days.Add(DayOfWeek.Friday);
+            //days.Add(DayOfWeek.Wednesday);
+            //var temp2 = new WeeklyAlarm(1,days, 7,3);
+            //TimeForAlarms.Add(temp2);
+            //var temp3 = new RandomAlarm(2, 2019, 5, 3, 18, 44);
+            //TimeForAlarms.Add(temp3);
+
             var timer = new Timer();
             timer.Elapsed += timerTriggered;
             timer.Interval = 1000;

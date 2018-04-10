@@ -7,7 +7,7 @@
         xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Closing="RedXHit"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="500" Width="900">
     <Grid>
 
         <tb:TaskbarIcon
@@ -18,11 +18,34 @@
                     <MenuItem Header="Edit Alarm" Click="OpenWindow"/>
                     <MenuItem Header="Close" Click="CloseProgram"/>
                 </ContextMenu>
-                    
+
             </tb:TaskbarIcon.ContextMenu>
 
         </tb:TaskbarIcon>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="166,143,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <DataGrid x:Name="AlarmGrid" HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" Height="375" Width="850"
+                  ScrollViewer.CanContentScroll="True" CanUserAddRows="False" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Alarm Type" Binding="{Binding AlarmType}"/>
+                <DataGridTextColumn Header="Alarm Time" Binding="{Binding AlarmTime}" Width="*"/>
+                <DataGridTemplateColumn Header="Edit">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="EditAlarm" CommandParameter="{Binding ID}">Edit</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteAlarm" CommandParameter="{Binding ID}">Delete</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Add new daily Alarm" Click="AddDailyAlarm" HorizontalAlignment="Left" Margin="25,410,0,0" VerticalAlignment="Top"  Height="50" Width="150"/>
+        <Button Content="Add new weekly Alarm" Click="AddWeeklyAlarm" HorizontalAlignment="Center" Margin="0,410,0,0" Height="50" Width="150"/>
+        <Button Content="Add new random Alarm" Click="AddRandomAlarm" HorizontalAlignment="Right" Margin="0,410,25,0" Height="50" Width="150"/>
 
 
     </Grid>

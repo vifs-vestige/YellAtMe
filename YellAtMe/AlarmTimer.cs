@@ -16,12 +16,12 @@ namespace YellAtMe
         public AlarmTimer(MainWindow window)
         {
             TimeForAlarms = new List<TimeForAlarm>();
+            window.AlarmGrid.ItemsSource = TimeForAlarms;
             var timer = new Timer();
             timer.Elapsed += timerTriggered;
             timer.Interval = 1000;
             timer.Start();
             Window = window;
-            //Temp = new DailyAlarm();
         }
 
         #region alarmStuff

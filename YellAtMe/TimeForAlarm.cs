@@ -9,6 +9,9 @@ namespace YellAtMe
     public abstract class TimeForAlarm
     {
         private bool Triggered = false;
+        public string AlarmType { get; set; }
+        public string AlarmTime { get; set; }
+        public int ID { get; set; }
 
         public bool getTriggered()
         {

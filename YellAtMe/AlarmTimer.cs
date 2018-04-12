@@ -41,6 +41,7 @@ namespace YellAtMe
         public void AddAlarm(TimeForAlarm alarm)
         {
             TimeForAlarms.Add(alarm);
+            SetIDs();
         }
 
         public List<TimeForAlarm> GetAlarms()
@@ -51,6 +52,15 @@ namespace YellAtMe
         public void RemoveAlarm(TimeForAlarm alarm)
         {
             TimeForAlarms.Remove(alarm);
+            SetIDs();
+        }
+
+        private void SetIDs()
+        {
+            for (int i = 0; i < TimeForAlarms.Count; i++)
+            {
+                TimeForAlarms[i].ID = i;
+            }
         }
         #endregion
         

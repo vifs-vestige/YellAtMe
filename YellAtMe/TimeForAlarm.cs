@@ -42,9 +42,8 @@ namespace YellAtMe
 
     public class DailyAlarm : TimeForAlarm
     {
-        public DailyAlarm(int id, int hour, int minuite)
+        public DailyAlarm(int hour, int minuite)
         {
-            ID = id;
             AlarmType = "Daily";
             
             SetTime(hour, minuite);
@@ -70,9 +69,8 @@ namespace YellAtMe
     {
         private List<DayOfWeek> Days;
 
-        public WeeklyAlarm(int id, List<DayOfWeek> days, int hour, int minuites)
+        public WeeklyAlarm(List<DayOfWeek> days, int hour, int minuites)
         {
-            ID = id;
             AlarmType = "Weekly";
             SetTime(days, hour, minuites);
         }
@@ -98,10 +96,9 @@ namespace YellAtMe
     public class RandomAlarm : TimeForAlarm
     {
 
-        public RandomAlarm(int id, int year, int month, int day, int hour, int minuite)
+        public RandomAlarm(int year, int month, int day, int hour, int minuite)
         {
             AlarmType = "Random";
-            ID = id;
             SetAlarm(year, month, day, hour, minuite);
         }
 

@@ -36,6 +36,8 @@ namespace YellAtMe
         {
             InitializeComponent();
             new AlarmTimer(this);
+            var temp = new Daily();
+            temp.Show();
             //List<Test> temp = new List<Test>();
             //temp.Add(new Test() { AlarmType = "hello", AlarmTime = "hi", ID = 1 });
             //temp.Add(new Test() { AlarmType = "thing", AlarmTime = "yup", ID = 2 });

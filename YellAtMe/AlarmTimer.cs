@@ -19,8 +19,8 @@ namespace YellAtMe
             window.AlarmGrid.ItemsSource = TimeForAlarms;
 
             //for testing display
-            //var temp = new DailyAlarm(5,34);
-            //TimeForAlarms.Add(temp);
+            var temp = new DailyAlarm(5,34);
+            TimeForAlarms.Add(temp);
             //var days = new List<DayOfWeek>();
             //days.Add(DayOfWeek.Monday);
             //days.Add(DayOfWeek.Friday);
@@ -42,12 +42,16 @@ namespace YellAtMe
         {
             TimeForAlarms.Add(alarm);
             SetIDs();
-            Window.AlarmGrid.Items.Refresh();
         }
 
         public List<TimeForAlarm> GetAlarms()
         {
             return TimeForAlarms;
+        }
+
+        public TimeForAlarm GetAlarm(int id)
+        {
+            return TimeForAlarms[id];
         }
 
         public void RemoveAlarm(int id)

@@ -23,19 +23,46 @@ namespace YellAtMe
     {
         private AlarmTimer Alarm;
         private MainWindow Window;
+        private bool Edit = false;
+        private int ID;
 
         public Daily(AlarmTimer alarm, MainWindow window)
         {
             InitializeComponent();
-            Window = window;
+            Common(alarm, window);
+        }
+
+        public Daily(AlarmTimer alarm, MainWindow window, DateTime time, int id)
+        {
+            InitializeComponent();
+            Common(alarm, window);
+            Edit = true;
+            ID = id;
+            Time.Value = time;
+        }
+
+        private void Common(AlarmTimer alarm, MainWindow window)
+        {
             Alarm = alarm;
+            Window = window;
+            Show();
+            window.Hide();           
         }
 
         private void Save(object sender, RoutedEventArgs e)
         {
             var time = (DateTime)Time.Value;
-            var temp = new DailyAlarm(time.Hour, time.Minute);
-            Alarm.AddAlarm(temp);
+            if (Edit)
+            {
+                var temp = (DailyAlarm)Alarm.GetAlarm(ID);
+                temp.SetTime(time.Hour, time.Minute);
+            }
+            else
+            {
+                var temp = new DailyAlarm(time.Hour, time.Minute);
+                Alarm.AddAlarm(temp);
+            }
+            Window.AlarmGrid.Items.Refresh();
             Window.Show();
             Close();
         }
@@ -46,7 +73,7 @@ namespace YellAtMe
             Close();
         }
 
-        private void Closing(object sender, CancelEventArgs e)
+        private void CloseRight(object sender, CancelEventArgs e)
         {
             Window.Show();
         }

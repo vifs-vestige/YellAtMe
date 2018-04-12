@@ -81,7 +81,11 @@ namespace YellAtMe
 
         private void EditAlarm(object sender, RoutedEventArgs e)
         {
-            var temp = ((Button)sender).CommandParameter;
+            var temp = (int)((Button)sender).CommandParameter;
+            var alarm = Alarm.GetAlarm(temp);
+            if (alarm.AlarmType == "Daily") 
+                new Daily(Alarm, this, alarm.GetAlarm(), alarm.ID);
+
             Console.WriteLine("");
         }
 
@@ -94,8 +98,6 @@ namespace YellAtMe
         private void AddDailyAlarm(object sender, RoutedEventArgs e)
         {
             var temp = new Daily(Alarm, this);
-            Hide();
-            temp.Show();
         }
 
         private void AddWeeklyAlarm(object sender, RoutedEventArgs e)

@@ -20,6 +20,11 @@ namespace YellAtMe
             return Triggered;
         }
 
+        public DateTime GetAlarm()
+        {
+            return Alarm;
+        }
+
         public void AlarmWentOff()
         {
             Triggered = true;

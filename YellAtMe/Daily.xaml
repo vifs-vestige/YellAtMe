@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:YellAtMe"
         mc:Ignorable="d"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        Closing="Closing"
+        Closing="CloseRight"
         Title="Daily" Height="200" Width="300">
     <Grid>
 

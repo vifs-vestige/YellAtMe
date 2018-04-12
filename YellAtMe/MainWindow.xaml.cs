@@ -91,7 +91,8 @@ namespace YellAtMe
 
         private void DeleteAlarm(object sender, RoutedEventArgs e)
         {
-            var temp = ((Button)sender).CommandParameter;
+            var temp = (int)((Button)sender).CommandParameter;
+            Alarm.RemoveAlarm(temp);
             Console.WriteLine("");
         }
 

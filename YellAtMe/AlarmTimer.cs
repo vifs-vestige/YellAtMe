@@ -21,14 +21,14 @@ namespace YellAtMe
             //for testing display
             var temp = new DailyAlarm(5,34);
             TimeForAlarms.Add(temp);
-            //var days = new List<DayOfWeek>();
-            //days.Add(DayOfWeek.Monday);
-            //days.Add(DayOfWeek.Friday);
-            //days.Add(DayOfWeek.Wednesday);
-            //var temp2 = new WeeklyAlarm(days, 7,3);
-            //TimeForAlarms.Add(temp2);
-            //var temp3 = new RandomAlarm(2019, 5, 3, 18, 44);
-            //TimeForAlarms.Add(temp3);
+            var days = new List<DayOfWeek>();
+            days.Add(DayOfWeek.Monday);
+            days.Add(DayOfWeek.Friday);
+            days.Add(DayOfWeek.Wednesday);
+            var temp2 = new WeeklyAlarm(days, 7,3);
+            TimeForAlarms.Add(temp2);
+            var temp3 = new RandomAlarm(2019, 5, 3, 18, 44);
+            TimeForAlarms.Add(temp3);
 
             var timer = new Timer();
             timer.Elapsed += timerTriggered;

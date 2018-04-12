@@ -30,6 +30,7 @@ namespace YellAtMe
         {
             InitializeComponent();
             Common(alarm, window);
+            Time.Value = DateTime.Now;
         }
 
         public Daily(AlarmTimer alarm, MainWindow window, DateTime time, int id)

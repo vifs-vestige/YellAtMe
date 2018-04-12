@@ -29,6 +29,7 @@ namespace YellAtMe
             TimeForAlarms.Add(temp2);
             var temp3 = new RandomAlarm(2019, 5, 3, 18, 44);
             TimeForAlarms.Add(temp3);
+            SetIDs();
 
             var timer = new Timer();
             timer.Elapsed += timerTriggered;

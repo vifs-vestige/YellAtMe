@@ -87,6 +87,9 @@
       <DependentUpon>Daily.xaml</DependentUpon>
     </Compile>
     <Compile Include="TimeForAlarm.cs" />
+    <Compile Include="Weekly.xaml.cs">
+      <DependentUpon>Weekly.xaml</DependentUpon>
+    </Compile>
     <Page Include="Daily.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +107,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Weekly.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

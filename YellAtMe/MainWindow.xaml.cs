@@ -85,6 +85,8 @@ namespace YellAtMe
             var alarm = Alarm.GetAlarm(temp);
             if (alarm.AlarmType == "Daily") 
                 new Daily(Alarm, this, alarm.GetAlarm(), alarm.ID);
+            if (alarm.AlarmType == "Weekly")
+                new Weekly(Alarm, this, ((WeeklyAlarm)alarm).GetDays() ,alarm.GetAlarm(), alarm.ID);
 
             Console.WriteLine("");
         }
@@ -98,12 +100,12 @@ namespace YellAtMe
 
         private void AddDailyAlarm(object sender, RoutedEventArgs e)
         {
-            var temp = new Daily(Alarm, this);
+            new Daily(Alarm, this);
         }
 
         private void AddWeeklyAlarm(object sender, RoutedEventArgs e)
         {
-
+            new Weekly(Alarm, this);
         }
 
         private void AddRandomAlarm(object sender, RoutedEventArgs e)

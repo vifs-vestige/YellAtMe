@@ -79,6 +79,11 @@ namespace YellAtMe
             SetTime(days, hour, minuites);
         }
 
+        public List<DayOfWeek> GetDays()
+        {
+            return Days;
+        }
+
         public void SetTime(List<DayOfWeek> days, int hour, int minuite)
         {
             Days = days;

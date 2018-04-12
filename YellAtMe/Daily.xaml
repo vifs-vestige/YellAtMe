@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:YellAtMe"
         mc:Ignorable="d"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Closing="Closing"
         Title="Daily" Height="200" Width="300">
     <Grid>
 
-        <xctk:DateTimeUpDown 
+        <xctk:DateTimeUpDown x:Name="Time"
             HorizontalAlignment="Right" VerticalAlignment="Top"
             Margin="0,25,10,0"
             Height="20" Width="100"

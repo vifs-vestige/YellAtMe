@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace YellAtMe
 {
-    class AlarmTimer
+    public class AlarmTimer
     {
         private List<TimeForAlarm> TimeForAlarms;
         private MainWindow Window;
@@ -19,15 +19,15 @@ namespace YellAtMe
             window.AlarmGrid.ItemsSource = TimeForAlarms;
 
             //for testing display
-            //var temp = new DailyAlarm(0, 5,34);
+            //var temp = new DailyAlarm(5,34);
             //TimeForAlarms.Add(temp);
             //var days = new List<DayOfWeek>();
             //days.Add(DayOfWeek.Monday);
             //days.Add(DayOfWeek.Friday);
             //days.Add(DayOfWeek.Wednesday);
-            //var temp2 = new WeeklyAlarm(1,days, 7,3);
+            //var temp2 = new WeeklyAlarm(days, 7,3);
             //TimeForAlarms.Add(temp2);
-            //var temp3 = new RandomAlarm(2, 2019, 5, 3, 18, 44);
+            //var temp3 = new RandomAlarm(2019, 5, 3, 18, 44);
             //TimeForAlarms.Add(temp3);
 
             var timer = new Timer();
@@ -42,6 +42,7 @@ namespace YellAtMe
         {
             TimeForAlarms.Add(alarm);
             SetIDs();
+            Window.AlarmGrid.Items.Refresh();
         }
 
         public List<TimeForAlarm> GetAlarms()
@@ -49,10 +50,11 @@ namespace YellAtMe
             return TimeForAlarms;
         }
 
-        public void RemoveAlarm(TimeForAlarm alarm)
+        public void RemoveAlarm(int id)
         {
-            TimeForAlarms.Remove(alarm);
+            TimeForAlarms.RemoveAt(id);
             SetIDs();
+            Window.AlarmGrid.Items.Refresh();
         }
 
         private void SetIDs()

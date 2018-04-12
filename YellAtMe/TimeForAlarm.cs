@@ -45,7 +45,6 @@ namespace YellAtMe
         public DailyAlarm(int hour, int minuite)
         {
             AlarmType = "Daily";
-            
             SetTime(hour, minuite);
         }
 

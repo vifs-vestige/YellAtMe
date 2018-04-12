@@ -30,14 +30,13 @@ namespace YellAtMe
     /// </summary>
     public partial class MainWindow : Window
     {
+        private AlarmTimer Alarm;
 
         
         public MainWindow()
         {
             InitializeComponent();
-            new AlarmTimer(this);
-            var temp = new Daily();
-            temp.Show();
+            Alarm = new AlarmTimer(this);
             //List<Test> temp = new List<Test>();
             //temp.Add(new Test() { AlarmType = "hello", AlarmTime = "hi", ID = 1 });
             //temp.Add(new Test() { AlarmType = "thing", AlarmTime = "yup", ID = 2 });
@@ -74,7 +73,7 @@ namespace YellAtMe
 
         #endregion
 
-        public void RedXHit(object sender, CancelEventArgs e)
+        private void RedXHit(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
             Hide();
@@ -94,7 +93,9 @@ namespace YellAtMe
 
         private void AddDailyAlarm(object sender, RoutedEventArgs e)
         {
-
+            var temp = new Daily(Alarm, this);
+            Hide();
+            temp.Show();
         }
 
         private void AddWeeklyAlarm(object sender, RoutedEventArgs e)

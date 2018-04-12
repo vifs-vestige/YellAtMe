@@ -108,10 +108,10 @@ namespace YellAtMe
         public RandomAlarm(int year, int month, int day, int hour, int minuite)
         {
             AlarmType = "Random";
-            SetAlarm(year, month, day, hour, minuite);
+            SetTime(year, month, day, hour, minuite);
         }
 
-        public void SetAlarm(int year, int month, int day, int hour, int minuite)
+        public void SetTime(int year, int month, int day, int hour, int minuite)
         {
             Alarm = new DateTime(year, month, day, hour, minuite, 0);
             AlarmTime = "Alarm will go off at " + Alarm.ToShortDateString() + " "+ Alarm.ToShortTimeString();

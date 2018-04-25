@@ -27,6 +27,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Alarm Type" Binding="{Binding AlarmType}"/>
                 <DataGridTextColumn Header="Alarm Time" Binding="{Binding AlarmTime}" Width="*"/>
+                <DataGridTextColumn Header="Alarm Text" Binding="{Binding AlarmText}" Width="*"/>
+                <DataGridCheckBoxColumn Header="Sound?" Binding="{Binding AlarmHasSound}" IsReadOnly="True" />
                 <DataGridTemplateColumn Header="Edit">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

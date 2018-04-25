@@ -13,8 +13,9 @@ namespace YellAtMe
         public string AlarmType { get; set; }
         public string AlarmTime { get; set; }
         public int ID { get; set; }
-        public string AlarmSound { get; set; }
         public string AlarmText { get; set; }
+        public bool AlarmHasSound { get; set; }
+        private string AlarmSound;
 
         
 
@@ -26,6 +27,21 @@ namespace YellAtMe
         public DateTime GetAlarm()
         {
             return Alarm;
+        }
+
+        public void SetAlarmSound(string alarmSound)
+        {
+            AlarmSound = alarmSound;
+            if (AlarmSound == "")
+                AlarmHasSound = false;
+            else
+                AlarmHasSound = true;
+
+        }
+
+        public string GetAlarmSound()
+        {
+            return AlarmSound;
         }
 
         public void AlarmWentOff()

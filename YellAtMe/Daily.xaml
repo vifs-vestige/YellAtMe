@@ -25,6 +25,7 @@
             IsReadOnly="True"
             VerticalAlignment="Top" HorizontalAlignment="Left"
             Margin="10,60,0,0"
+            Text=""
             Height="20" Width="190" />
         <Button
             VerticalAlignment="Top" HorizontalAlignment="Right"

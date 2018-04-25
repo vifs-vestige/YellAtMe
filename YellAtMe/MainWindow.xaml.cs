@@ -71,8 +71,7 @@ namespace YellAtMe
         }
         private void OpenWindow(object sender, RoutedEventArgs e)
         {
-            if (AlarmSaveEditOpen == false)
-                Show();
+            Show();
         }
 
         private void CloseProgram(object sender, RoutedEventArgs e)

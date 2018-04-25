@@ -42,7 +42,7 @@ namespace YellAtMe
             ID = dailyAlarm.ID;
             Time.Value = dailyAlarm.GetAlarm();
             AlarmText.Text = dailyAlarm.AlarmText;
-            AlarmSoundFile.Text = dailyAlarm.AlarmSound;
+            AlarmSoundFile.Text = dailyAlarm.GetAlarmSound();
         }
 
         private void Common(AlarmTimer alarm, MainWindow window)
@@ -65,14 +65,14 @@ namespace YellAtMe
             if (Edit)
             {
                 var temp = (DailyAlarm)Alarm.GetAlarm(ID);
-                temp.AlarmSound = AlarmSoundFile.Text;
+                temp.SetAlarmSound(AlarmSoundFile.Text);
                 temp.AlarmText = AlarmText.Text;
                 temp.SetTime(time.Hour, time.Minute);
             }
             else
             {
                 var temp = new DailyAlarm(time.Hour, time.Minute);
-                temp.AlarmSound = AlarmSoundFile.Text;
+                temp.SetAlarmSound(AlarmSoundFile.Text);
                 temp.AlarmText = AlarmText.Text;
                 Alarm.AddAlarm(temp);
             }

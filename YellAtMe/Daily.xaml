@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Closing="CloseRight"
-        Title="Daily" Height="200" Width="300">
+        Title="Daily" Height="300" Width="300">
     <Grid>
 
         <xctk:DateTimeUpDown x:Name="Time"
@@ -20,6 +20,30 @@
             Margin="10,25,0,0"
             Height="20" Width="150"
             Text="Pick Time for Daily Alarm"/>
+        <TextBox
+            x:Name="AlarmSoundFile"
+            IsReadOnly="True"
+            VerticalAlignment="Top" HorizontalAlignment="Left"
+            Margin="10,60,0,0"
+            Height="20" Width="190" />
+        <Button
+            VerticalAlignment="Top" HorizontalAlignment="Right"
+            Margin="0,60,10,0"
+            Click="PickFile"
+            Content="Alarm Sound"/>
+        <TextBlock
+            HorizontalAlignment="Center" VerticalAlignment="Top"
+            Margin="0,90,0,0"
+            Text="Set Text for Alarm"
+            />
+        <TextBox
+            x:Name="AlarmText"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top" HorizontalAlignment="Center"
+            Margin="0,110,0,0"
+            Width="260" Height="80"
+            />
         <Button
             HorizontalAlignment="Left" VerticalAlignment="Bottom"
             Margin="50,0,0,30"

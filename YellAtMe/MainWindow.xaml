@@ -15,7 +15,7 @@
             MenuActivation="LeftOrRightClick">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Edit Alarm" Click="OpenWindow"/>
+                    <MenuItem Header="Edit Alarm" Click="OpenWindow" x:Name="EditAlarmContextMenu"/>
                     <MenuItem Header="Close" Click="CloseProgram"/>
                 </ContextMenu>
 

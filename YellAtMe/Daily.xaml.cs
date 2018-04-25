@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -33,13 +34,15 @@ namespace YellAtMe
             Time.Value = DateTime.Now;
         }
 
-        public Daily(AlarmTimer alarm, MainWindow window, DateTime time, int id)
+        public Daily(AlarmTimer alarm, MainWindow window, DailyAlarm dailyAlarm)
         {
             InitializeComponent();
             Common(alarm, window);
             Edit = true;
-            ID = id;
-            Time.Value = time;
+            ID = dailyAlarm.ID;
+            Time.Value = dailyAlarm.GetAlarm();
+            AlarmText.Text = dailyAlarm.AlarmText;
+            AlarmSoundFile.Text = dailyAlarm.AlarmSound;
         }
 
         private void Common(AlarmTimer alarm, MainWindow window)
@@ -47,7 +50,13 @@ namespace YellAtMe
             Alarm = alarm;
             Window = window;
             Show();
-            window.Hide();           
+            window.Hide();
+            window.DisallowOpenWindow();         
+        }
+
+        private void PickFile(object sender, RoutedEventArgs e)
+        {
+            AlarmSoundFile.Text = AlarmWindowTools.PickFile();
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -56,15 +65,18 @@ namespace YellAtMe
             if (Edit)
             {
                 var temp = (DailyAlarm)Alarm.GetAlarm(ID);
+                temp.AlarmSound = AlarmSoundFile.Text;
+                temp.AlarmText = AlarmText.Text;
                 temp.SetTime(time.Hour, time.Minute);
             }
             else
             {
                 var temp = new DailyAlarm(time.Hour, time.Minute);
+                temp.AlarmSound = AlarmSoundFile.Text;
+                temp.AlarmText = AlarmText.Text;
                 Alarm.AddAlarm(temp);
             }
             Window.AlarmGrid.Items.Refresh();
-            Window.Show();
             Close();
         }
 
@@ -76,7 +88,15 @@ namespace YellAtMe
 
         private void CloseRight(object sender, CancelEventArgs e)
         {
-            Window.Show();
+            Window.AllowOpenWindow();
+            //Empty Catch if you use context menu to close program while this open
+            //I know bad, but whatever, easier then doing some logic and method calling to
+            //make sure window.open isn't called if close is called while this open
+            try
+            {
+                Window.Show();
+            }
+            catch (Exception) { }
         }
 
     }

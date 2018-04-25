@@ -13,6 +13,9 @@ namespace YellAtMe
         public string AlarmType { get; set; }
         public string AlarmTime { get; set; }
         public int ID { get; set; }
+        public string AlarmSound { get; set; }
+        public string AlarmText { get; set; }
+
         
 
         public bool getTriggered()

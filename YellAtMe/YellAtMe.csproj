@@ -85,6 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AlarmWindowTools.cs" />
     <Compile Include="Daily.xaml.cs">
       <DependentUpon>Daily.xaml</DependentUpon>
     </Compile>

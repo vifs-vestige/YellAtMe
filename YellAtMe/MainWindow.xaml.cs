@@ -31,7 +31,6 @@ namespace YellAtMe
     public partial class MainWindow : Window
     {
         private AlarmTimer Alarm;
-
         
         public MainWindow()
         {
@@ -61,9 +60,19 @@ namespace YellAtMe
 
         #region contextMenu
 
+        public void AllowOpenWindow()
+        {
+            EditAlarmContextMenu.IsEnabled = true;
+        }
+
+        public void DisallowOpenWindow()
+        {
+            EditAlarmContextMenu.IsEnabled = false;
+        }
         private void OpenWindow(object sender, RoutedEventArgs e)
         {
-            Show();
+            if (AlarmSaveEditOpen == false)
+                Show();
         }
 
         private void CloseProgram(object sender, RoutedEventArgs e)
@@ -84,7 +93,7 @@ namespace YellAtMe
             var temp = (int)((Button)sender).CommandParameter;
             var alarm = Alarm.GetAlarm(temp);
             if (alarm.AlarmType == "Daily") 
-                new Daily(Alarm, this, alarm.GetAlarm(), alarm.ID);
+                new Daily(Alarm, this, (DailyAlarm)alarm);
             if (alarm.AlarmType == "Weekly")
                 new Weekly(Alarm, this, ((WeeklyAlarm)alarm).GetDays() ,alarm.GetAlarm(), alarm.ID);
             if (alarm.AlarmType == "Random")

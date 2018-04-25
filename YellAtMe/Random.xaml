@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Closing="CloseRight"
+        ResizeMode="CanMinimize"
         Title="Random" Height="200" Width="300">
     <Grid>
         <xctk:DateTimePicker x:Name="Time"

@@ -26,12 +26,17 @@
             VerticalAlignment="Top" HorizontalAlignment="Left"
             Margin="10,60,0,0"
             Text=""
-            Height="20" Width="190" />
+            Height="20" Width="100" />
+        <Button
+            VerticalAlignment="Top" HorizontalAlignment="Right"
+            Margin="0,60,80,0"
+            Click="RemoveFile"
+            Content="Remove Sound" />
         <Button
             VerticalAlignment="Top" HorizontalAlignment="Right"
             Margin="0,60,10,0"
             Click="PickFile"
-            Content="Alarm Sound"/>
+            Content="Pick Sound"/>
         <TextBlock
             HorizontalAlignment="Center" VerticalAlignment="Top"
             Margin="0,90,0,0"

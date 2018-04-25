@@ -59,6 +59,11 @@ namespace YellAtMe
             AlarmSoundFile.Text = AlarmWindowTools.PickFile();
         }
 
+        private void RemoveFile(object sender, RoutedEventArgs e)
+        {
+            AlarmSoundFile.Text = "";
+        }
+
         private void Save(object sender, RoutedEventArgs e)
         {
             var time = (DateTime)Time.Value;

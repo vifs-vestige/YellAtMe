@@ -95,13 +95,17 @@ namespace YellAtMe
 
         public void ShowAlarm(TimeForAlarm alarm)
         {
-            Window.NotifyIcon.ShowBalloonTip("Alarm Went Off", alarm.AlarmText, 
-                Hardcodet.Wpf.TaskbarNotification.BalloonIcon.None);
-            if (alarm.AlarmHasSound)
-            {
-                Window.NotifyIcon.TrayBalloonTipShown += (sender, e) => OpenBalloon(sender, e, alarm.GetAlarmSound());
-                Window.NotifyIcon.TrayBalloonTipClosed += (sender, e) => CloseBalloon(sender, e);
-            }
+            //using a balloon is a mess, going to just make a new window instead
+            //string text = alarm.AlarmText;
+            //if (text == "")
+            //    text = "Alarm Went Off";
+            //Window.NotifyIcon.ShowBalloonTip("Alarm Went Off", text, 
+            //    Hardcodet.Wpf.TaskbarNotification.BalloonIcon.None);
+            //if (alarm.AlarmHasSound)
+            //{
+            //    Window.NotifyIcon.TrayBalloonTipShown += (sender, e) => OpenBalloon(sender, e, alarm.GetAlarmSound());
+            //    //Window.NotifyIcon.TrayBalloonTipClosed += (sender, e) => CloseBalloon(sender, e);
+            //}
         }
 
         private void OpenBalloon(object sender, EventArgs e, string sound)
@@ -109,6 +113,7 @@ namespace YellAtMe
             SoundPlayer = new MediaPlayer();
             SoundPlayer.Open(new Uri(sound));
             SoundPlayer.Play();
+            SoundPlayer.MediaEnded += LoopAlarm;
         }
 
         private void CloseBalloon(object sender, EventArgs e)
@@ -116,6 +121,15 @@ namespace YellAtMe
             Console.WriteLine("");
             SoundPlayer.Stop();
             
+        }
+
+        private void LoopAlarm(object sender, EventArgs e)
+        {
+            MediaPlayer player = (MediaPlayer)sender;
+            player.Position = TimeSpan.Zero;
+            player.Volume -= 5;
+            player.Play();
+
         }
     }
 }

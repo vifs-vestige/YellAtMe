@@ -12,7 +12,8 @@
     <Grid>
 
         <tb:TaskbarIcon
-            ToolTipText="hello world"
+            x:Name="NotifyIcon"
+            ToolTipText="TheAlarms"
             MenuActivation="LeftOrRightClick">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>

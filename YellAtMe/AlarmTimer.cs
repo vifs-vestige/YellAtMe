@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace YellAtMe
 {
@@ -11,6 +14,7 @@ namespace YellAtMe
     {
         private List<TimeForAlarm> TimeForAlarms;
         private MainWindow Window;
+        private static MediaPlayer SoundPlayer;
         //private DailyAlarm Temp;
 
         public AlarmTimer(MainWindow window)
@@ -80,13 +84,38 @@ namespace YellAtMe
 
 
 
-            //foreach (var item in TimeForAlarms)
-            //{
-            //    if (item.AlarmTriggered() && !item.getTriggered())
-            //    {
-            //        //do stuff
-            //    }
-            //}
+            foreach (var item in TimeForAlarms)
+            {
+                if (item.AlarmTriggered() && !item.getTriggered())
+                {
+                    ShowAlarm(item.AlarmWentOff());
+                }
+            }
+        }
+
+        public void ShowAlarm(TimeForAlarm alarm)
+        {
+            Window.NotifyIcon.ShowBalloonTip("Alarm Went Off", alarm.AlarmText, 
+                Hardcodet.Wpf.TaskbarNotification.BalloonIcon.None);
+            if (alarm.AlarmHasSound)
+            {
+                Window.NotifyIcon.TrayBalloonTipShown += (sender, e) => OpenBalloon(sender, e, alarm.GetAlarmSound());
+                Window.NotifyIcon.TrayBalloonTipClosed += (sender, e) => CloseBalloon(sender, e);
+            }
+        }
+
+        private void OpenBalloon(object sender, EventArgs e, string sound)
+        {
+            SoundPlayer = new MediaPlayer();
+            SoundPlayer.Open(new Uri(sound));
+            SoundPlayer.Play();
+        }
+
+        private void CloseBalloon(object sender, EventArgs e)
+        {
+            Console.WriteLine("");
+            SoundPlayer.Stop();
+            
         }
     }
 }

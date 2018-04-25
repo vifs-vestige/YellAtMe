@@ -31,13 +31,15 @@ namespace YellAtMe
             Time.Value = DateTime.Now;
         }
 
-        public Weekly(AlarmTimer alarm, MainWindow window, List<DayOfWeek> days, DateTime time, int id)
+        public Weekly(AlarmTimer alarm, MainWindow window, WeeklyAlarm weeklyAlarm)
         {
             InitializeComponent();
-            ID = id;
+            ID = weeklyAlarm.ID;
             Edit = true;
-            Time.Value = time;
-            DayPicker.SelectedItemsOverride = days.Select(x => x.ToString()).ToList();
+            Time.Value = weeklyAlarm.GetAlarm();
+            DayPicker.SelectedItemsOverride = weeklyAlarm.GetDays().Select(x => x.ToString()).ToList();
+            AlarmText.Text = weeklyAlarm.AlarmText;
+            AlarmSoundFile.Text = weeklyAlarm.GetAlarmSound();
             Common(alarm, window);
         }
 
@@ -48,6 +50,17 @@ namespace YellAtMe
             DayPicker.ItemsSource = Enum.GetNames(typeof(DayOfWeek));
             Show();
             window.Hide();
+            window.DisallowOpenWindow();
+        }
+
+        private void PickFile(object sender, RoutedEventArgs e)
+        {
+            AlarmSoundFile.Text = AlarmWindowTools.PickFile();
+        }
+
+        private void RemoveFile(object sender, RoutedEventArgs e)
+        {
+            AlarmSoundFile.Text = "";
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -69,11 +82,15 @@ namespace YellAtMe
                 if (Edit)
                 {
                     var temp = (WeeklyAlarm)Alarm.GetAlarm(ID);
+                    temp.SetAlarmSound(AlarmSoundFile.Text);
+                    temp.AlarmText = AlarmText.Text;
                     temp.SetTime(days, time.Hour, time.Minute);
                 }
                 else
                 {
                     var temp = new WeeklyAlarm(days, time.Hour, time.Minute);
+                    temp.SetAlarmSound(AlarmSoundFile.Text);
+                    temp.AlarmText = AlarmText.Text;
                     Alarm.AddAlarm(temp);
                 }
                 Window.AlarmGrid.Items.Refresh();
@@ -89,7 +106,12 @@ namespace YellAtMe
 
         private void CloseRight(object sender, CancelEventArgs e)
         {
-            Window.Show();
+            Window.AllowOpenWindow();
+            try
+            {
+                Window.Show();
+            }
+            catch (Exception) { }
         }
     }
 }

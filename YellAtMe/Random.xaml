@@ -8,7 +8,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Closing="CloseRight"
         ResizeMode="CanMinimize"
-        Title="Random" Height="200" Width="300">
+        Title="Random" Height="300" Width="300">
     <Grid>
         <xctk:DateTimePicker x:Name="Time"
             HorizontalAlignment="Right" VerticalAlignment="Top"
@@ -19,6 +19,36 @@
             Margin="10,25,0,0"
             Height="20" Width="211"
             Text="Pick Time and Date for Random Alarm"/>
+        <TextBox
+            x:Name="AlarmSoundFile"
+            IsReadOnly="True"
+            VerticalAlignment="Top" HorizontalAlignment="Left"
+            Margin="10,80,0,0"
+            Text=""
+            Height="20" Width="100" />
+        <Button
+            VerticalAlignment="Top" HorizontalAlignment="Right"
+            Margin="0,80,80,0"
+            Click="RemoveFile"
+            Content="Remove Sound" />
+        <Button
+            VerticalAlignment="Top" HorizontalAlignment="Right"
+            Margin="0,80,10,0"
+            Click="PickFile"
+            Content="Pick Sound"/>
+        <TextBlock
+            HorizontalAlignment="Center" VerticalAlignment="Top"
+            Margin="0,110,0,0"
+            Text="Set Text for Alarm"
+            />
+        <TextBox
+            x:Name="AlarmText"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top" HorizontalAlignment="Center"
+            Margin="0,130,0,0"
+            Width="260" Height="60"
+            />
         <Button
             HorizontalAlignment="Left" VerticalAlignment="Bottom"
             Margin="50,0,0,30"

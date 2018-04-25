@@ -32,13 +32,15 @@ namespace YellAtMe
             Time.Value = DateTime.Now;
         }
 
-        public Random(AlarmTimer alarm, MainWindow window, DateTime time, int id)
+        public Random(AlarmTimer alarm, MainWindow window, RandomAlarm randomAlarm)
         {
             InitializeComponent();
             Common(alarm, window);
-            Time.Value = time;
-            ID = id;
+            Time.Value = randomAlarm.GetAlarm();
+            ID = randomAlarm.ID;
             Edit = true;
+            AlarmText.Text = randomAlarm.AlarmText;
+            AlarmSoundFile.Text = randomAlarm.GetAlarmSound();
         }
 
         private void Common(AlarmTimer alarm, MainWindow window)
@@ -47,6 +49,17 @@ namespace YellAtMe
             Window = window;
             Show();
             window.Hide();
+            window.DisallowOpenWindow();
+        }
+
+        private void PickFile(object sender, RoutedEventArgs e)
+        {
+            AlarmSoundFile.Text = AlarmWindowTools.PickFile();
+        }
+
+        private void RemoveFile(object sender, RoutedEventArgs e)
+        {
+            AlarmSoundFile.Text = "";
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -56,10 +69,14 @@ namespace YellAtMe
             {
                 var temp = (RandomAlarm)Alarm.GetAlarm(ID);
                 temp.SetTime(time.Year, time.Month, time.Day, time.Hour, time.Minute);
+                temp.SetAlarmSound(AlarmSoundFile.Text);
+                temp.AlarmText = AlarmText.Text;
             }
             else
             {
                 var temp = new RandomAlarm(time.Year, time.Month, time.Day, time.Hour, time.Minute);
+                temp.SetAlarmSound(AlarmSoundFile.Text);
+                temp.AlarmText = AlarmText.Text;
                 Alarm.AddAlarm(temp);
             }
             Window.AlarmGrid.Items.Refresh();
@@ -75,7 +92,12 @@ namespace YellAtMe
 
         private void CloseRight(object sender, CancelEventArgs e)
         {
-            Window.Show();
+            Window.AllowOpenWindow();
+            try
+            {
+                Window.Show();
+            }
+            catch (Exception) { }
         }
     }
 }

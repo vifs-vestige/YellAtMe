@@ -94,9 +94,9 @@ namespace YellAtMe
             if (alarm.AlarmType == "Daily") 
                 new Daily(Alarm, this, (DailyAlarm)alarm);
             if (alarm.AlarmType == "Weekly")
-                new Weekly(Alarm, this, ((WeeklyAlarm)alarm));
+                new Weekly(Alarm, this, (WeeklyAlarm)alarm);
             if (alarm.AlarmType == "Random")
-                new Random(Alarm, this, alarm.GetAlarm(), alarm.ID);
+                new Random(Alarm, this, (RandomAlarm)alarm);
 
             Console.WriteLine("");
         }

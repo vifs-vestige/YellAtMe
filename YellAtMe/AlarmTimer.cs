@@ -14,12 +14,10 @@ namespace YellAtMe
     {
         private List<TimeForAlarm> TimeForAlarms;
         private MainWindow Window;
+        
 
         public AlarmTimer(MainWindow window)
         {
-            TimeForAlarms = new List<TimeForAlarm>();
-            window.AlarmGrid.ItemsSource = TimeForAlarms;
-
             //for testing display
             //var temp = new DailyAlarm(5,34);
             //TimeForAlarms.Add(temp);
@@ -38,8 +36,8 @@ namespace YellAtMe
             timer.Start();
             Window = window;
             
-            
-
+            TimeForAlarms = SaveLoad.Load();
+            window.AlarmGrid.ItemsSource = TimeForAlarms;
             SetIDs();
         }
 
@@ -68,6 +66,7 @@ namespace YellAtMe
 
         private void SetIDs()
         {
+            SaveLoad.Save(TimeForAlarms);
             for (int i = 0; i < TimeForAlarms.Count; i++)
             {
                 TimeForAlarms[i].ID = i;

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Timers;
+using System.Xml.Serialization;
 
 namespace YellAtMe
 {
+    
+    [XmlInclude(typeof(DailyAlarm)),XmlInclude(typeof(WeeklyAlarm)),XmlInclude(typeof(RandomAlarm))]
     public abstract class TimeForAlarm
     {
         protected DateTime Alarm;
@@ -15,8 +18,8 @@ namespace YellAtMe
         public int ID { get; set; }
         public string AlarmText { get; set; }
         public bool AlarmHasSound { get; set; }
-        private string AlarmSound;
-
+        
+        public string _AlarmSound;
         
 
         public bool getTriggered()
@@ -31,8 +34,8 @@ namespace YellAtMe
 
         public void SetAlarmSound(string alarmSound)
         {
-            AlarmSound = alarmSound;
-            if (AlarmSound == "")
+            _AlarmSound = alarmSound;
+            if (_AlarmSound == "")
                 AlarmHasSound = false;
             else
                 AlarmHasSound = true;
@@ -41,13 +44,12 @@ namespace YellAtMe
 
         public string GetAlarmSound()
         {
-            return AlarmSound;
+            return _AlarmSound;
         }
         
         public void AlarmWentOff()
         {
             Triggered = true;
-            //Console.WriteLine("AlarmWentOff");
             var timer = new Timer();
             timer.Interval = 60000;
             timer.Elapsed += ResetTrigger;
@@ -55,13 +57,11 @@ namespace YellAtMe
 
             App.Current.Dispatcher.Invoke(() =>
                 { new AlarmWindow(this); });
-            //new AlarmWindow(this);
         }
         
 
         private void ResetTrigger(object sender, ElapsedEventArgs e)
         {
-            //Console.WriteLine("ResetTrigger");
             Triggered = false;
             ((Timer)sender).Stop();
         }
@@ -69,8 +69,11 @@ namespace YellAtMe
         public abstract bool AlarmTriggered();
     }
 
+    [XmlType("DailyAlarm")]
     public class DailyAlarm : TimeForAlarm
     {
+        private DailyAlarm() { }
+
         public DailyAlarm(int hour, int minuite)
         {
             AlarmType = "Daily";
@@ -93,9 +96,12 @@ namespace YellAtMe
         }
     }
 
+    [XmlType("WeeklyAlarm")]
     public class WeeklyAlarm : TimeForAlarm
     {
-        private List<DayOfWeek> Days;
+        public List<DayOfWeek> _Days;
+
+        private WeeklyAlarm() { }
 
         public WeeklyAlarm(List<DayOfWeek> days, int hour, int minuites)
         {
@@ -105,12 +111,12 @@ namespace YellAtMe
 
         public List<DayOfWeek> GetDays()
         {
-            return Days;
+            return _Days;
         }
 
         public void SetTime(List<DayOfWeek> days, int hour, int minuite)
         {
-            Days = days;
+            _Days = days;
             Alarm = new DateTime(1, 1, 1, hour, minuite, 0);
             AlarmTime = Alarm.ToShortTimeString() + " on " + String.Join(", " , days.OrderBy(x => x).Select(x => x.ToString()));
         }
@@ -119,15 +125,17 @@ namespace YellAtMe
         {
             var now = DateTime.Now;
             if (Alarm.Hour == now.Hour && Alarm.Minute == Alarm.Minute &&
-                Days.Contains(now.DayOfWeek))
+                _Days.Contains(now.DayOfWeek))
                 return true;
             return false;
         }
 
     }
 
+    [XmlType("RandomAlarm")]
     public class RandomAlarm : TimeForAlarm
     {
+        private RandomAlarm() { }
 
         public RandomAlarm(int year, int month, int day, int hour, int minuite)
         {

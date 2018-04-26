@@ -43,8 +43,8 @@ namespace YellAtMe
         {
             return AlarmSound;
         }
-
-        public TimeForAlarm AlarmWentOff()
+        
+        public void AlarmWentOff()
         {
             Triggered = true;
             //Console.WriteLine("AlarmWentOff");
@@ -52,7 +52,10 @@ namespace YellAtMe
             timer.Interval = 60000;
             timer.Elapsed += ResetTrigger;
             timer.Start();
-            return this;
+
+            App.Current.Dispatcher.Invoke(() =>
+                { new AlarmWindow(this); });
+            //new AlarmWindow(this);
         }
         
 

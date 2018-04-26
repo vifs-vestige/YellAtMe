@@ -1,0 +1,17 @@
+﻿<Window x:Class="YellAtMe.AlarmWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellAtMe"
+        mc:Ignorable="d"
+        Closing="CloseRight"
+        Title="AlarmWindow" Height="300" Width="300">
+    <Grid>
+        <TextBlock
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Height="200" Width="250"
+            x:Name="AlarmText"
+            />
+    </Grid>
+</Window>

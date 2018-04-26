@@ -41,6 +41,7 @@ namespace YellAtMe
             //temp.Add(new Test() { AlarmType = "thing", AlarmTime = "yup", ID = 2 });
             //AlarmGrid.ItemsSource = temp;
         }
+        
 
 
 

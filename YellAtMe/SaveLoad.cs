@@ -14,7 +14,8 @@ namespace YellAtMe
 
         public static void Save(List<TimeForAlarm> alarms)
         {
-            FileStream outFile = File.Create(FilePath);
+            var temp = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + FilePath;
+            FileStream outFile = File.Create(temp);
             XmlSerializer formatter = new XmlSerializer(alarms.GetType());
             formatter.Serialize(outFile, alarms);
         }
@@ -23,7 +24,8 @@ namespace YellAtMe
         {
             var alarms = new List<TimeForAlarm>();
             XmlSerializer formatter = new XmlSerializer(alarms.GetType());
-            using (FileStream fileStream = new FileStream(FilePath, FileMode.OpenOrCreate))
+            var temp = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + FilePath;
+            using (FileStream fileStream = new FileStream(temp, FileMode.OpenOrCreate))
             {
                 if (fileStream.Length != 0)
                 {

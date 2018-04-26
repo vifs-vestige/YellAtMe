@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define YellAtMe_TargetDir=$(var.YellAtMe.TargetDir)?>
+  <Product Id="*" Name="YellAtMe" Language="1033" Version="1.0.0.0" Manufacturer="12thMorning" UpgradeCode="8d1b41c5-718f-4414-8724-4ecdaeb48295">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="YellAtMe" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ApplicationShortcut"/>
+      <ComponentRef Id="ApplicationShortcutDesktop"/>
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="YellAtMe"/>
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop"/>
+      
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="CompanyName" Name="12th Morning">
+          <Directory Id="INSTALLFOLDER" Name="YellAtMe" />
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+  
+  <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="D1A39331-8BF0-4D1A-B16E-6A73F921FD04">
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="YellAtMe" Description="YellAtMe" Target="[INSTALLFOLDER]YellAtMe.exe" WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\MyWpfApplication" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="ApplicationShortcutDesktop" Guid="cde1e030-eb64-49a5-b7b8-400b379c2d1a">
+        <Shortcut Id="ApplicationDesktopShortcut" Name="YellAtMe" Description="YellAtMe" Target="[INSTALLFOLDER]YellAtMe.exe" WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="RemoveDesktopFolder" Directory="DesktopFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="12th Morning\YellAtMe" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="YellAtMe.exe" Guid="a99c486d-538b-4a4a-bf10-c705d13d9dca">
+        <File Id="YellAtMe.exe" Name="YellAtMe.exe" Source="$(var.YellAtMe_TargetDir)YellAtMe.exe" />
+      </Component>
+      <Component Id="YellAtMe.exe.config" Guid="edc2d705-499d-4144-acb1-46a4ff6a1da8">
+        <File Id="YellAtMe.exe.config" Name="YellAtMe.exe.config" Source="$(var.YellAtMe_TargetDir)YellAtMe.exe.config" />
+      </Component>
+      <Component Id="Hardcodet.Wpf.TaskbarNotification.dll" Guid="db6f5784-3c4d-47f8-a733-6dbf2b1b5914">
+        <File Id="Hardcodet.Wpf.TaskbarNotification.dll" Name="Hardcodet.Wpf.TaskbarNotification.dll" Source="$(var.YellAtMe_TargetDir)Hardcodet.Wpf.TaskbarNotification.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.AvalonDock.dll" Guid="b31fd87e-83d8-4cef-bbe9-c5876cb1928c">
+        <File Id="Xceed.Wpf.AvalonDock.dll" Name="Xceed.Wpf.AvalonDock.dll" Source="$(var.YellAtMe_TargetDir)Xceed.Wpf.AvalonDock.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Guid="9d6cd00a-6896-40cf-979a-6502f565c5a2">
+        <File Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Name="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Source="$(var.YellAtMe_TargetDir)Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Guid="3a72f109-9b83-4838-b663-0f68893b1443">
+        <File Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Name="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Source="$(var.YellAtMe_TargetDir)Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Guid="7e0ecf35-b425-4940-8c04-d7bc3da3392d">
+        <File Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Name="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Source="$(var.YellAtMe_TargetDir)Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.DataGrid.dll" Guid="31f7e63f-ab1f-4f31-908e-ed218d7e4083">
+        <File Id="Xceed.Wpf.DataGrid.dll" Name="Xceed.Wpf.DataGrid.dll" Source="$(var.YellAtMe_TargetDir)Xceed.Wpf.DataGrid.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.Toolkit.dll" Guid="2de1cc9e-61f9-4f51-b49c-f6ca0a219b32">
+        <File Id="Xceed.Wpf.Toolkit.dll" Name="Xceed.Wpf.Toolkit.dll" Source="$(var.YellAtMe_TargetDir)Xceed.Wpf.Toolkit.dll" />
+      </Component>
+      <Component Id="YellAtMe.pdb" Guid="94bc6380-44ad-4bf0-98be-9ce6b0d51c75">
+        <File Id="YellAtMe.pdb" Name="YellAtMe.pdb" Source="$(var.YellAtMe_TargetDir)YellAtMe.pdb" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

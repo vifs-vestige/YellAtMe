@@ -11,7 +11,7 @@ namespace YellAtMe
     [XmlInclude(typeof(DailyAlarm)),XmlInclude(typeof(WeeklyAlarm)),XmlInclude(typeof(RandomAlarm))]
     public abstract class TimeForAlarm
     {
-        protected DateTime Alarm;
+        public DateTime _Alarm;
         private bool Triggered = false;
         public string AlarmType { get; set; }
         public string AlarmTime { get; set; }
@@ -29,7 +29,7 @@ namespace YellAtMe
 
         public DateTime GetAlarm()
         {
-            return Alarm;
+            return _Alarm;
         }
 
         public void SetAlarmSound(string alarmSound)
@@ -82,15 +82,15 @@ namespace YellAtMe
 
         public void SetTime(int hour, int minuite)
         {
-            Alarm = new DateTime(1, 1, 1, hour, minuite, 0);
-            AlarmTime = "Everyday at " + Alarm.ToShortTimeString();
+            _Alarm = new DateTime(1, 1, 1, hour, minuite, 0);
+            AlarmTime = "Everyday at " + _Alarm.ToShortTimeString();
         }
 
 
         public override bool AlarmTriggered()
         {
             var now = DateTime.Now;
-            if (Alarm.Hour == now.Hour && Alarm.Minute == now.Minute)
+            if (_Alarm.Hour == now.Hour && _Alarm.Minute == now.Minute)
                 return true;
             return false;
         }
@@ -117,14 +117,14 @@ namespace YellAtMe
         public void SetTime(List<DayOfWeek> days, int hour, int minuite)
         {
             _Days = days;
-            Alarm = new DateTime(1, 1, 1, hour, minuite, 0);
-            AlarmTime = Alarm.ToShortTimeString() + " on " + String.Join(", " , days.OrderBy(x => x).Select(x => x.ToString()));
+            _Alarm = new DateTime(1, 1, 1, hour, minuite, 0);
+            AlarmTime = _Alarm.ToShortTimeString() + " on " + String.Join(", " , days.OrderBy(x => x).Select(x => x.ToString()));
         }
 
         public override bool AlarmTriggered()
         {
             var now = DateTime.Now;
-            if (Alarm.Hour == now.Hour && Alarm.Minute == Alarm.Minute &&
+            if (_Alarm.Hour == now.Hour && _Alarm.Minute == _Alarm.Minute &&
                 _Days.Contains(now.DayOfWeek))
                 return true;
             return false;
@@ -145,16 +145,16 @@ namespace YellAtMe
 
         public void SetTime(int year, int month, int day, int hour, int minuite)
         {
-            Alarm = new DateTime(year, month, day, hour, minuite, 0);
-            AlarmTime = "Alarm will go off at " + Alarm.ToShortDateString() + " "+ Alarm.ToShortTimeString();
+            _Alarm = new DateTime(year, month, day, hour, minuite, 0);
+            AlarmTime = "Alarm will go off at " + _Alarm.ToShortDateString() + " "+ _Alarm.ToShortTimeString();
         }
 
         public override bool AlarmTriggered()
         {
             var now = DateTime.Now;
-            if (Alarm.Year == now.Year && Alarm.Month == now.Month &&
-                Alarm.Day == now.Day && Alarm.Hour == now.Hour &&
-                Alarm.Minute == now.Minute)
+            if (_Alarm.Year == now.Year && _Alarm.Month == now.Month &&
+                _Alarm.Day == now.Day && _Alarm.Hour == now.Hour &&
+                _Alarm.Minute == now.Minute)
                 return true;
             return false;
         }

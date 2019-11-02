@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?define YellAtMe_TargetDir=$(var.YellAtMe.TargetDir)?>
-  <Product Id="*" Name="YellAtMe" Language="1033" Version="1.0.0.0" Manufacturer="12thMorning" UpgradeCode="8d1b41c5-718f-4414-8724-4ecdaeb48295">
-    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-    <MediaTemplate />
-
+	<Product Id="*" Name="YellAtMe" Language="1033" Version="1.0.0.0" Manufacturer="Vifs" UpgradeCode="05176753-E394-4426-9DF7-E180875AEAC0">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes"/>
     <Feature Id="ProductFeature" Title="YellAtMe" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="ApplicationShortcut"/>
       <ComponentRef Id="ApplicationShortcutDesktop"/>
     </Feature>
-  </Product>
+    <Icon Id="icon.ico" SourceFile="alarm.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+    <UIRef Id="WixUI_InstallDir" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <WixVariable Id="WixUILicenseRtf" Value="LicenseAgreement.rtf" />
+    <WixVariable Id="WixUIDialogBmp" Value="Dialog.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="Banner.bmp" />
+	</Product>
 
   <Fragment>
     <Directory Id="TARGETDIR" Name="SourceDir">
@@ -19,32 +25,31 @@
         <Directory Id="ApplicationProgramsFolder" Name="YellAtMe"/>
       </Directory>
       <Directory Id="DesktopFolder" Name="Desktop"/>
-      
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="CompanyName" Name="12th Morning">
+        <Directory Id="CompanyName" Name="Vifs">
           <Directory Id="INSTALLFOLDER" Name="YellAtMe" />
         </Directory>
       </Directory>
     </Directory>
   </Fragment>
-  
+
   <Fragment>
     <DirectoryRef Id="ApplicationProgramsFolder">
-      <Component Id="ApplicationShortcut" Guid="D1A39331-8BF0-4D1A-B16E-6A73F921FD04">
-        <Shortcut Id="ApplicationStartMenuShortcut" Name="YellAtMe" Description="YellAtMe" Target="[INSTALLFOLDER]YellAtMe.exe" WorkingDirectory="INSTALLFOLDER" />
+      <Component Id="ApplicationShortcut" Guid="*">
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="YellAtMe" Description="YellAtMe" Icon="icon.ico" Target="[INSTALLFOLDER]YellAtMe.exe" WorkingDirectory="INSTALLFOLDER" />
         <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
-        <RegistryValue Root="HKCU" Key="Software\MyWpfApplication" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+        <RegistryValue Root="HKCU" Key="Vifs\YellAtMe" Name="installed" Type="integer" Value="1" KeyPath="yes" />
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="DesktopFolder">
-      <Component Id="ApplicationShortcutDesktop" Guid="cde1e030-eb64-49a5-b7b8-400b379c2d1a">
-        <Shortcut Id="ApplicationDesktopShortcut" Name="YellAtMe" Description="YellAtMe" Target="[INSTALLFOLDER]YellAtMe.exe" WorkingDirectory="INSTALLFOLDER" />
+      <Component Id="ApplicationShortcutDesktop" Guid="5F1A1EBE-91E0-4919-B91E-E4F57FED0FBA">
+        <Shortcut Id="ApplicationDesktopShortcut" Name="YellAtMe" Description="YellAtMe" Icon="icon.ico" Target="[INSTALLFOLDER]YellAtMe.exe" WorkingDirectory="INSTALLFOLDER" />
         <RemoveFolder Id="RemoveDesktopFolder" Directory="DesktopFolder" On="uninstall" />
-        <RegistryValue Root="HKCU" Key="12th Morning\YellAtMe" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+        <RegistryValue Root="HKCU" Key="Vifs\YellAtMe" Name="installed" Type="integer" Value="1" KeyPath="yes" />
       </Component>
     </DirectoryRef>
   </Fragment>
-  
+
   <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
       <Component Id="YellAtMe.exe" Guid="a99c486d-538b-4a4a-bf10-c705d13d9dca">

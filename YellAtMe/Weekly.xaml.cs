@@ -24,6 +24,7 @@ namespace YellAtMe
         private MainWindow Window;
         private bool Edit = false;
         private int ID;
+
         public Weekly(AlarmTimer alarm, MainWindow window)
         {
             InitializeComponent();

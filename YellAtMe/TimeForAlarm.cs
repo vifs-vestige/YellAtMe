@@ -124,7 +124,7 @@ namespace YellAtMe
         public override bool AlarmTriggered()
         {
             var now = DateTime.Now;
-            if (_Alarm.Hour == now.Hour && _Alarm.Minute == _Alarm.Minute &&
+            if (_Alarm.Hour == now.Hour && _Alarm.Minute == now.Minute &&
                 _Days.Contains(now.DayOfWeek))
                 return true;
             return false;

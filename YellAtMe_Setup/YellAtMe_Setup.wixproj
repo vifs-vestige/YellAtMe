@@ -1,12 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.10</ProductVersion>
-    <ProjectGuid>a8f429a9-2606-4376-a509-08902cbc675d</ProjectGuid>
+    <ProjectGuid>b2904d0e-0e45-4211-84c1-05a3402b9674</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>YellAtMe</OutputName>
+    <OutputName>YellAtMe_Setup</OutputName>
     <OutputType>Package</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -22,7 +22,16 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SetupProject1.wax" />
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="alarm.ico" />
+    <Content Include="Banner.bmp" />
+    <Content Include="Dialog.bmp" />
+    <Content Include="LicenseAgreement.rtf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YellAtMe\YellAtMe.csproj">
